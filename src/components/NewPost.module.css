@@ -1,0 +1,40 @@
+.form{
+    background-color: rgb(244, 221, 185);
+    padding: 1rem;
+    width: 30rem;
+}
+
+
+.form label{
+    display: block;
+    margin-bottom: 0.1rem;
+    color: #5a3333;
+    font-weight: bold;
+}
+
+.form input,
+.form textarea{
+    display: block;
+    width: 100%;
+    font: inherit;
+    border-radius: 6px;
+}
+
+.form input:focus,
+.form textarea:focus{
+    outline: none;
+}
+
+.buttons{
+    display: flex;
+    justify-content: flex-end;
+    gap:0.2rem;
+}
+
+.buttons button{
+    padding: 0.4rem 1.5rem;
+    cursor: pointer;
+    border: none;
+    background-color: rgb(208, 193, 116);
+    border-radius: 3px;
+}

@@ -1,0 +1,33 @@
+.header{
+    margin : 2rem 10%;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom : 2px solid black;
+
+}
+
+.logo{
+    font-size: 2rem;
+    color: rgb(57, 33, 2);
+}
+
+.menus{
+    display: flex;
+    list-style: none;
+    gap: 1.5rem;
+}
+
+.menus button{
+    border: none;
+    background-color: bisque;
+    display: flex;
+    align-items: center;
+}
+
+
+.menus a{
+  text-decoration: none;
+  color : black;
+}
