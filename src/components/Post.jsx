@@ -2,10 +2,10 @@ import classes from './Post.module.css'
 
 function Post({title,body}) {
   return (
-    <div className={classes.background}>
+    <li className={classes.post}>
       <p>{title}</p>
       <p>{body}</p>
-    </div>
+    </li>
   );
 }
 

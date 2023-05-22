@@ -1,3 +1,6 @@
-.background{
+.post{
     background-color: beige;
+    list-style: none;
+    width: 10rem;
+    height: 27vh;
 }

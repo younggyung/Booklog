@@ -19,7 +19,7 @@
     gap: 1.5rem;
 }
 
-.menus button{
+.menus li{
     border: none;
     background-color: bisque;
     display: flex;
