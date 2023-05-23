@@ -1,14 +1,15 @@
 import classes from "./NewPost.module.css";
-import { useState } from "react";
 import Modal from "../components/Modal";
 import { Link, redirect,Form } from 'react-router-dom';
+import Editor from './Editor';
 
 function NewPost() {
 
   return (
     <>
       <Modal>
-        <Form method='POST' className={classes.form} >
+        <Editor/>
+        {/* <Form method='POST' className={classes.form} >
           <p>
             <label htmlFor="title">제목</label>
             <input
@@ -25,11 +26,17 @@ function NewPost() {
               name="body"
             ></textarea>
           </p>
+          <p>
+            <label htmlFor='date'>완독</label>
+            <input type='date'
+            id='date'
+            name='date'/>
+          </p>
           <p className={classes.buttons}>
             <button>작성</button>
             <Link to='..' type="button" >취소</Link>
           </p>
-        </Form>
+        </Form> */}
       </Modal>
     </>
   );
@@ -46,5 +53,5 @@ fetch("http://localhost:3000/posts", {
         "Content-Type": "application/json",
       },
     });
- return redirect('/');
+  return redirect('/');
 }

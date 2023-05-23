@@ -1,6 +1,6 @@
 import { useLoaderData } from "react-router-dom";
 import Post from "./Post";
-import classes from './PostList.module.css';
+import classes from "./PostList.module.css";
 
 function PostList() {
   const posts = useLoaderData();
@@ -16,7 +16,13 @@ function PostList() {
       {posts.length > 0 && (
         <ul className={classes.postlist}>
           {posts.map((post) => (
-            <Post key={Math.random()} title={post.title} body={post.body} />
+              <Post
+                key={Math.random()}
+                title={post.title}
+                body={post.body.slice(0, 250)}
+                date={post.date}
+                id={post.id}
+              />
           ))}
         </ul>
       )}

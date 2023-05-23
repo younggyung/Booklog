@@ -4,11 +4,10 @@
     width: 30rem;
 }
 
-
 .form label{
     display: block;
     margin-bottom: 0.1rem;
-    color: #5a3333;
+    color: #000000;
     font-weight: bold;
 }
 
@@ -18,6 +17,7 @@
     width: 100%;
     font: inherit;
     border-radius: 6px;
+    border: none;
 }
 
 .form input:focus,
@@ -31,10 +31,15 @@
     gap:0.2rem;
 }
 
-.buttons button{
+.buttons button,
+.buttons a {
     padding: 0.4rem 1.5rem;
     cursor: pointer;
     border: none;
     background-color: rgb(208, 193, 116);
     border-radius: 3px;
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    font-size: 15px;
 }
+
