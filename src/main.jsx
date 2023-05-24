@@ -8,9 +8,10 @@ import RootLayout from "./routes/RootLayout.jsx";
 import PostDetail, {
   loader as postDetailLoader,
 } from "./routes/Postdetail.jsx";
+import Editor from './Editor.jsx';
 
 const router = createBrowserRouter([
-  {
+  { id: 'root',
     path: "/",
     element: <RootLayout />,
     children: [
@@ -24,7 +25,9 @@ const router = createBrowserRouter([
       },
       { path: "post/:id", element: <PostDetail />, loader: postDetailLoader },
     ],
-  },
+  
+    
+  },        { path: "test", element: < Editor/>} /* 에디터 API 테스트용 */
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

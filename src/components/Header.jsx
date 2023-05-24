@@ -2,7 +2,7 @@ import classes from "./Header.module.css";
 import { MdPostAdd,MdOutlineLogin } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 
-function Header({onPosting}) {
+function Header() {
 
   return (
     <header className={classes.header}>

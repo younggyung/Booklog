@@ -1,7 +1,10 @@
-import { useLoaderData } from "react-router-dom";
+import {useLoaderData,useNavigate } from "react-router-dom";
 import classes from "./PostDetail.module.css";
+
 function PostDetail() {
   const post = useLoaderData();
+  const navigate = useNavigate();
+
   return (
     <div className={classes.contents}>
       <div className={classes.title_area}>
@@ -13,7 +16,24 @@ function PostDetail() {
       </div>
       <p>
         <button>수정</button>
-        <button>삭제</button>
+        <button
+          onClick={(e) => {
+            fetch("http://localhost:3000/posts/" + post.id, {
+              method: "DELETE",
+            })
+              .then((response) => {
+                if (!response.ok) {
+                  throw new Error("Error");
+                }
+                navigate('..')
+              })
+              .catch((e) => {
+                console.log(e);
+              });
+          }}
+        >
+          삭제
+        </button>
       </p>
     </div>
   );
