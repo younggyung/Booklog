@@ -1,16 +1,16 @@
 {
   "posts": [
     {
-      "title": "뉴포스트",
-      "body": "fgfdgafddfghfgd",
-      "date": "",
-      "id": 8
-    },
-    {
       "title": "어허어어",
-      "body": "푸ㄴㅇㄹ오ㄹㄹㄹㄹ",
+      "body": "내용수정",
       "date": "",
       "id": 9
+    },
+    {
+      "title": "글쓰기",
+      "body": "내용테스크",
+      "date": "",
+      "id": 10
     }
   ]
 }

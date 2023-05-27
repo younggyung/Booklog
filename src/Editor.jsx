@@ -1,20 +1,10 @@
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import { Link, Form, redirect } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState, useRef, memo } from "react";
+import { Form } from "react-router-dom";
 
-export default function Editor({ onCancel, onAddPost }) {
-  const [enteredData, setEnteredData] = useState();
-  const [posts, setPosts] = useState([]);
-
-  useEffect(() => {
-    async function fetchData() {
-      const response = await fetch("http://localhostL3000/posts");
-      const resData = await response.json();
-      setPosts(resData);
-    }
-    fetchData();
-  }, []);
+export default function Editor({}) {
+  const [body, setBody] = useState();
 
   const modules = {
     toolbar: [
@@ -31,19 +21,39 @@ export default function Editor({ onCancel, onAddPost }) {
   };
 
   return (
-    <>
-      <div style={{ height: "700px" }}>
+    <Form method="POST">
+      <p>
+        <label htmlFor="title">제목</label>
+        <input type="text" name="title" />
+      </p>
+      <div style={{ height: "650px" }}>
+        <label htmlFor="body">내용</label>
         <ReactQuill
           modules={modules}
           placeholder="내용을 입력해주세요."
-          onChange={(value) => setEnteredData(value)}
           theme="snow"
-          style={{ height: "650px" }}
+          style={{ height: "500px" }}
+          onChange={setBody}
         />
+        <input type="hidden" name='body' value={body} />
       </div>
+      <label htmlFor="date">완독</label>
+      <input type="date" name="date" />
       <button>취소</button>
-      <button>완료</button>
-      <Post />
-    </>
+      <button type="submit">완료</button>
+    </Form>
   );
+}
+
+export async function action({ request }) {
+  const formData = await request.formData();
+  const postData = Object.fromEntries(formData);
+  fetch("http://localhost:3000/posts", {
+    method: "POST",
+    body: JSON.stringify(postData),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return redirect("/");
 }

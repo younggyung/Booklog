@@ -14,7 +14,11 @@ function PostDetail() {
           <span>{post.date}</span>
         </div>
         <div className={classes.body_area}>
-          <p>{post.body}</p>
+          <p
+            dangerouslySetInnerHTML={{
+              __html: post.body,
+            }}/>
+
         </div>
         <p>
           <button
