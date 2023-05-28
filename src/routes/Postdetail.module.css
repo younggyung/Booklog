@@ -16,7 +16,7 @@
   text-align: center;
 }
 
-button {
+.buttons {
   font-size: 15px;
   float: right;
   background-color: white;

@@ -21,14 +21,14 @@ function PostDetail() {
 
         </div>
         <p>
-          <button
+          <button className={classes.buttons}
             onClick={(e) => {
               navigate("update");
             }}
           >
             수정
           </button>
-          <button
+          <button className={classes.buttons}
             onClick={(e) => {
               fetch("http://localhost:3000/posts/" + post.id, {
                 method: "DELETE",

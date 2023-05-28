@@ -8,8 +8,9 @@ import RootLayout from "./routes/RootLayout.jsx";
 import PostDetail, {
   loader as postDetailLoader,
 } from "./routes/Postdetail.jsx";
-import Editor  from "./Editor.jsx";
-import UpdatePost,{action as updateAction} from "./routes/UpdatePost";
+import Editor from "./Editor.jsx";
+import UpdatePost, { action as updateAction } from "./routes/UpdatePost";
+import BookSearch from "./routes/BookSearch.jsx";
 
 const router = createBrowserRouter([
   {
@@ -32,13 +33,20 @@ const router = createBrowserRouter([
       {
         path: "post/:id",
         element: <PostDetail />,
-        id:'post',
+        id: "post",
         loader: postDetailLoader,
-        children: [{ path: "update", element: <UpdatePost /> , action: updateAction}],
+        children: [
+          { path: "update", element: <UpdatePost />, action: updateAction },
+        ],
       },
+      { path: "search-books", element: <BookSearch />},
     ],
   },
-  { path: "test", element: <Editor />, action: newpostAction } /* 에디터 API 테스트용 */,
+  {
+    path: "test",
+    element: <Editor />,
+    action: newpostAction,
+  } /* 에디터 API 테스트용 */,
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

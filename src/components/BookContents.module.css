@@ -1,0 +1,25 @@
+.li{
+    margin: auto;
+    max-width: 800px;
+    list-style: none;
+    display: flex;
+    margin-bottom: 40px;
+}
+
+.li image{
+    display: block;
+}
+
+.li div{
+    background-color: rgb(255, 255, 255);
+    width: fit-content;
+    padding: 10px;
+}
+
+
+
+
+.li p{
+    background-color: rgb(157, 157, 157);
+    overflow: auto;
+}

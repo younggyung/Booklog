@@ -1,0 +1,30 @@
+.wrapper {
+  margin-top: 200px;
+  margin-bottom: 200px;
+  background-color: rgb(159, 205, 205);
+  display: grid;
+  justify-items: center;
+  ;
+}
+
+.wrapper p {
+  text-align: center;
+}
+
+.input {
+  width: 250px;
+  height: 25px;
+  text-align: center;
+  font-style: italic;
+  font-size: 18px;
+}
+
+.button {
+  border: none;
+  background-color: inherit;
+  height: 27px;
+}
+
+.result {
+  background-color: beige;
+}
