@@ -1,4 +1,4 @@
-import React, { Children } from "react";
+import React from "react";
 import ReactDOM from "react-dom/client";
 import Posts, { loader as postsLoader } from "./routes/Posts.jsx";
 import "./index.css";
@@ -8,9 +8,9 @@ import RootLayout from "./routes/RootLayout.jsx";
 import PostDetail, {
   loader as postDetailLoader,
 } from "./routes/Postdetail.jsx";
-import Editor from "./Editor.jsx";
-import UpdatePost, { action as updateAction } from "./routes/UpdatePost";
+import Editor from "./routes/Editor.jsx";
 import BookSearch from "./routes/BookSearch.jsx";
+import UpdatePost, { action as updateAction } from "./routes/UpdatePost.jsx";
 
 const router = createBrowserRouter([
   {
@@ -22,31 +22,29 @@ const router = createBrowserRouter([
         path: "/",
         element: <Posts />,
         loader: postsLoader,
-        children: [
-          {
-            path: "/newpost",
-            element: <NewPost />,
-            action: newpostAction,
-          },
-        ],
+        children:[ { path: "/search-books", element: <BookSearch /> },
+      ]
+      },
+      {
+        path: "/newpost",
+        element: <Editor />,
+        action: newpostAction,
       },
       {
         path: "post/:id",
         element: <PostDetail />,
         id: "post",
         loader: postDetailLoader,
-        children: [
-          { path: "update", element: <UpdatePost />, action: updateAction },
-        ],
+        children: [],
       },
-      { path: "search-books", element: <BookSearch />},
+      {
+        path: "post/:id/update",
+        element: <UpdatePost />,
+        action: updateAction,
+        loader: postDetailLoader,
+      },
     ],
   },
-  {
-    path: "test",
-    element: <Editor />,
-    action: newpostAction,
-  } /* 에디터 API 테스트용 */,
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

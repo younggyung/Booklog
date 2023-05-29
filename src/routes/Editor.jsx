@@ -1,16 +1,13 @@
-import classes from "./Editor.module.css";
-import { Form, useLoaderData, useNavigate } from "react-router-dom";
-import { useState, useMemo } from "react";
 import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
+import { useState, useRef, useMemo } from "react";
+import { Form } from "react-router-dom";
+import classes from "./Editor.module.css";
 
-function UpdatePost() {
-  const originPost = useLoaderData();
+export default function Editor({}) {
+  const quillRef = useRef();
   const [body, setBody] = useState();
-  const navigate = useNavigate();
 
-  const cancel = ()=>{
-    navigate('..');
-  }
   const modules = useMemo(() => ({
     toolbar: [
       ["bold", "italic", "underline", "strike"],
@@ -29,7 +26,7 @@ function UpdatePost() {
     <Form method="POST">
       <main className={classes.main}>
         <div className={classes.editorHead}>
-          <select name="category" defaultValue={originPost.category}>
+          <select name="category">
             <option value="">카테고리</option>
             <option value="문학">문학</option>
             <option value="인문">인문</option>
@@ -39,19 +36,13 @@ function UpdatePost() {
           </select>
           <label htmlFor="data">
             완독일
-            <input
-              type="date"
-              name="date"
-              className={classes.date}
-              defaultValue={originPost.date}
-            />
+            <input type="date" name="date" className={classes.date} />
           </label>
           <input
             type="text"
             name="title"
             placeholder="제목을 입력하세요"
             className={classes.titleInput}
-            defaultValue={originPost.title}
           />
           <input type="hidden" name="body" value={body} />
         </div>
@@ -63,29 +54,28 @@ function UpdatePost() {
             theme="snow"
             style={{ height: "500px" }}
             onChange={setBody}
-            defaultValue={originPost.body}
+            value={body}
+            ref={quillRef}
           />
         </div>
       </main>
       <div className={classes.footer}>
         <button type="submit">작성완료</button>
-        <button onClick={cancel}>취소</button>
+        <button>취소</button>
       </div>
     </Form>
   );
 }
 
-export default UpdatePost;
-export async function action({ request, params }) {
+export async function action({ request }) {
   const formData = await request.formData();
-  const updates = Object.fromEntries(formData);
-  fetch("http://localhost:3000/posts/" + params.id, {
-    method: "PUT",
+  const postData = Object.fromEntries(formData);
+  fetch("http://localhost:3000/posts", {
+    method: "POST",
+    body: JSON.stringify(postData),
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(updates),
   });
-  window.location.href = "/post/" + params.id;
-  return null;
+  return redirect("/");
 }

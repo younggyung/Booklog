@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import classes from "./BookSearch.module.css";
 import BookContents from "../components/BookContents";
+import Modal from "../components/Modal";
 
-function BookSearch() {
+function BookSearch({closeModal}) {
   const [data, setData] = useState([]);
   console.log(data);
 
@@ -24,11 +25,13 @@ function BookSearch() {
   }
 
   return (
-    <main>
+    <Modal closeModal={closeModal}>
       <div className={classes.wrapper}>
+        <div className={classes.form}>
         <form onSubmit={getBookInfo}>
-          <p>제목 또는 저자명으로 검색하세요 🧐</p>
+          <p>책 정보 찾기 🧐</p>
           <input
+            placeholder="제목 또는 저자명 입력"
             type="text"
             name="keyword"
             id="keyword"
@@ -37,6 +40,7 @@ function BookSearch() {
           />
           <button className={classes.button}>검색</button>
         </form>
+        </div>
         <div className={classes.result}>
           <ul>
             {data.map((book) => (
@@ -51,7 +55,7 @@ function BookSearch() {
           </ul>
         </div>
       </div>
-    </main>
+    </Modal>
   );
 }
 export default BookSearch;

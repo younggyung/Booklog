@@ -32,7 +32,6 @@
 
 .menus li{
     border: none;
-    background-color: bisque;
     display: flex;
     align-items: center;
 }
@@ -41,4 +40,5 @@
 .menus a{
   text-decoration: none;
   color : black;
+  cursor: pointer;
 }

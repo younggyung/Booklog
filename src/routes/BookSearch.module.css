@@ -1,13 +1,16 @@
-.wrapper {
-  margin-top: 200px;
-  margin-bottom: 200px;
-  background-color: rgb(159, 205, 205);
-  display: grid;
-  justify-items: center;
-  ;
+.result ul {
+  padding: 0;
 }
 
-.wrapper p {
+.wrapper {
+  text-align: center;
+  max-width: 600px;
+  max-height: 600px;
+}
+
+.form {
+  padding-top: 20px;
+  min-width: 400px;
   text-align: center;
 }
 
@@ -23,8 +26,4 @@
   border: none;
   background-color: inherit;
   height: 27px;
-}
-
-.result {
-  background-color: beige;
 }

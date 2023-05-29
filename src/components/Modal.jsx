@@ -1,15 +1,21 @@
+import { useEffect } from "react";
 import classes from "./Modal.module.css";
-import { useNavigate } from "react-router-dom";
 
-function Modal ({children}) {
-  const navigate = useNavigate();
+function Modal ({children,closeModal}) {
 
-    function cancelModal(event){
-        navigate('..');
-    }
+  useEffect(() => {
+    const $body = document.querySelector("body");
+    const overflow = $body.style.overflow;
+    $body.style.overflow = "hidden";
+    return () => {
+    	$body.style.overflow = overflow
+    };
+  }, []);
+
+
   return (
     <>
-      <div className={classes.backDrop} onClick={cancelModal}/>
+      <div className={classes.backDrop} onClick={closeModal}/>
       <dialog open className={classes.modal}>
         {children}
       </dialog>

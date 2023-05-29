@@ -1,9 +1,12 @@
 import { useLoaderData, useNavigate, Outlet } from "react-router-dom";
 import classes from "./PostDetail.module.css";
+import DOMPurify from 'isomorphic-dompurify';
+
 
 function PostDetail() {
   const post = useLoaderData();
   const navigate = useNavigate();
+
 
   return (
     <>
@@ -16,14 +19,14 @@ function PostDetail() {
         <div className={classes.body_area}>
           <p
             dangerouslySetInnerHTML={{
-              __html: post.body,
+              __html:DOMPurify.sanitize(post.body)
             }}/>
 
         </div>
         <p>
           <button className={classes.buttons}
             onClick={(e) => {
-              navigate("update");
+              navigate('update');
             }}
           >
             수정
