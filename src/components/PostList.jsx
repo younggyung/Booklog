@@ -4,6 +4,7 @@ import classes from "./PostList.module.css";
 
 function PostList() {
   const posts = useLoaderData();
+  console.log(posts)
 
   return (
     <>
@@ -16,13 +17,19 @@ function PostList() {
       {posts.length > 0 && (
         <ul className={classes.postlist}>
           {posts.map((post) => (
-              <Post
-                key={Math.random()}
-                title={post.title}
-                body={post.body.replace(/(<([^>]+)>)/gi, "").slice(0,250)+' ...'} 
-                date={post.date}
-                id={post.id}
-              />
+            <Post
+              key={Math.random()}
+              title={post.title}
+              body={
+                post.body.length >= 200
+                  ? post.body.replace(/(<([^>]+)>)/gi, "").slice(0, 200)+' ...'
+                  : post.body.replace(/(<([^>]+)>)/gi, "")
+              }
+              date={post.date}
+              id={post.id}
+              category={post.category}
+              writeDate={post.writeDate}
+            />
           ))}
         </ul>
       )}

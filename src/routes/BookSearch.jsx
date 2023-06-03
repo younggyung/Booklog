@@ -1,11 +1,14 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import classes from "./BookSearch.module.css";
 import BookContents from "../components/BookContents";
 import Modal from "../components/Modal";
 
-function BookSearch({closeModal}) {
+function BookSearch({ closeModal }) {
   const [data, setData] = useState([]);
+  const [result , setResult] =useState(true);
   console.log(data);
+  console.log(result);
+  
 
   async function getBookInfo(e) {
     e.preventDefault();
@@ -21,41 +24,49 @@ function BookSearch({closeModal}) {
       },
     });
     const resData = await response.json();
-    setData(resData.items);
+    if(resData.items.length > 0 ){
+      setData(resData.items);
+      setResult(true);
+    }else if(resData.items.length <= 0){
+      setData(resData.items)
+      setResult(false);
+    };
   }
 
-  return (
-    <Modal closeModal={closeModal}>
-      <div className={classes.wrapper}>
-        <div className={classes.form}>
-        <form onSubmit={getBookInfo}>
-          <p>책 정보 찾기 🧐</p>
-          <input
-            placeholder="제목 또는 저자명 입력"
-            type="text"
-            name="keyword"
-            id="keyword"
-            required
-            className={classes.input}
-          />
-          <button className={classes.button}>검색</button>
-        </form>
-        </div>
-        <div className={classes.result}>
-          <ul>
-            {data.map((book) => (
-              <BookContents
-                key={Math.random()}
-                title={book.title}
-                author={book.author}
-                description={book.description}
-                image={book.image}
+    return (
+      <Modal closeModal={closeModal}>
+        <div className={classes.wrapper}>
+          <div className={classes.form}>
+            <form onSubmit={getBookInfo}>
+              <p>책 정보 찾기 🧐</p>
+              <input
+                placeholder="제목 또는 저자명 입력"
+                type="text"
+                name="keyword"
+                id="keyword"
+                required
+                className={classes.input}
               />
-            ))}
-          </ul>
+              <button className={classes.button}>검색</button>
+            </form>
+          </div>
+          <div className={classes.result}>
+            <ul>
+              {data.length>0 && data.map((book) => (
+                <BookContents
+                  key={Math.random()}
+                  title={book.title}
+                  author={book.author}
+                  description={book.description}
+                  image={book.image}
+                />
+              ))} 
+              {!result && "검색결과가 없습니다"}
+            </ul>
+          </div>
         </div>
-      </div>
-    </Modal>
-  );
-}
+      </Modal>
+    );
+  }
+
 export default BookSearch;

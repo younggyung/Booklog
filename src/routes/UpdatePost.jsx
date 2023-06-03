@@ -1,12 +1,14 @@
 import classes from "./Editor.module.css";
-import { Form, useLoaderData, useNavigate } from "react-router-dom";
+import { Form,redirect,useLoaderData, useNavigate } from "react-router-dom";
 import { useState, useMemo } from "react";
 import ReactQuill from "react-quill";
 
 function UpdatePost() {
   const originPost = useLoaderData();
-  const [body, setBody] = useState();
   const navigate = useNavigate();
+  const [data,setData] = useState(originPost);
+  console.log(data)
+
 
   const cancel = ()=>{
     navigate('..');
@@ -25,11 +27,47 @@ function UpdatePost() {
     ],
   }));
 
+
+  const titleHandler=(e)=>{
+    const title = e.target.value;
+    setData({...data, title:title});
+  }
+
+  const dateHandler=(e)=>{
+    const date = e.target.value;
+    setData({...data,date:date});
+  }
+
+  const categoryHandler =(e)=>{
+    const category = e.target.value;
+    setData({...data,category:category});
+  }
+
+  const bodyHandler =(e)=>{
+    const body = e;
+    setData({...data,body:body});
+  }
+
+
+    function submitHandler(e) {
+    e.preventDefault();
+    fetch("http://localhost:3000/posts/" + data.id, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data)
+    });
+    window.location.href = "/post/" + data.id;
+  }
+
+
+
   return (
-    <Form method="POST">
+    <form method="PUT" onSubmit={submitHandler}>
       <main className={classes.main}>
         <div className={classes.editorHead}>
-          <select name="category" defaultValue={originPost.category}>
+          <select name="category" defaultValue={originPost.category}  onChange={categoryHandler}>
             <option value="">카테고리</option>
             <option value="문학">문학</option>
             <option value="인문">인문</option>
@@ -44,16 +82,17 @@ function UpdatePost() {
               name="date"
               className={classes.date}
               defaultValue={originPost.date}
+              onChange={dateHandler}
             />
           </label>
           <input
             type="text"
             name="title"
-            placeholder="제목을 입력하세요"
             className={classes.titleInput}
             defaultValue={originPost.title}
+            onChange={titleHandler}
           />
-          <input type="hidden" name="body" value={body} />
+          {/* <input type="hidden" name="body" value={body} /> */}
         </div>
         <div className={classes.editorContainer}>
           <ReactQuill
@@ -62,7 +101,7 @@ function UpdatePost() {
             placeholder="내용을 입력해주세요."
             theme="snow"
             style={{ height: "500px" }}
-            onChange={setBody}
+            onChange={bodyHandler}
             defaultValue={originPost.body}
           />
         </div>
@@ -71,21 +110,23 @@ function UpdatePost() {
         <button type="submit">작성완료</button>
         <button onClick={cancel}>취소</button>
       </div>
-    </Form>
+    </form>
   );
 }
 
 export default UpdatePost;
-export async function action({ request, params }) {
-  const formData = await request.formData();
-  const updates = Object.fromEntries(formData);
-  fetch("http://localhost:3000/posts/" + params.id, {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(updates),
-  });
-  window.location.href = "/post/" + params.id;
-  return null;
-}
+// export async function action({ request, params }) {
+//   const formData = await request.formData();
+//   formData.append('body',body)
+//   const updates = Object.fromEntries(formData);
+  
+//   fetch("http://localhost:3000/posts/" + params.id, {
+//     method: "PUT",
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     body: JSON.stringify(updates),
+//   });
+//   window.location.href = "/post/" + params.id;
+//   return null;
+// }

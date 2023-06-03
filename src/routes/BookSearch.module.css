@@ -8,8 +8,10 @@
   max-height: 600px;
 }
 
+
 .form {
   padding-top: 20px;
+  padding-bottom: 20px;
   min-width: 400px;
   text-align: center;
 }

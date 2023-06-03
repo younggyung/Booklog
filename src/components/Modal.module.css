@@ -9,7 +9,7 @@
 }
 
 .modal{
-    margin-top: 40%;
+    margin-top: 700px;
     padding: 0;
     border: none;
     border-radius: 6px;
@@ -17,3 +17,7 @@
     overflow : scroll;
     z-index: 1;
 }
+
+.modal::-webkit-scrollbar {
+    display: none;
+    }

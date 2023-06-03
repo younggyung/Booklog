@@ -1,7 +1,7 @@
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { useState, useRef, useMemo } from "react";
-import { Form } from "react-router-dom";
+import { Form,redirect } from "react-router-dom";
 import classes from "./Editor.module.css";
 
 export default function Editor({}) {
@@ -26,19 +26,20 @@ export default function Editor({}) {
     <Form method="POST">
       <main className={classes.main}>
         <div className={classes.editorHead}>
-          <select name="category">
-            <option value="">카테고리</option>
+          <select name="category" required>
+            <option value="카테고리없음">카테고리</option>
             <option value="문학">문학</option>
             <option value="인문">인문</option>
             <option value="사회과학">사회과학</option>
             <option value="자기계발">자기계발</option>
-            <option value="자기계발">기타</option>
+            <option value="기타">기타</option>
           </select>
           <label htmlFor="data">
             완독일
-            <input type="date" name="date" className={classes.date} />
+            <input type="date" name="date" className={classes.date} required />
           </label>
           <input
+            required
             type="text"
             name="title"
             placeholder="제목을 입력하세요"
@@ -56,6 +57,7 @@ export default function Editor({}) {
             onChange={setBody}
             value={body}
             ref={quillRef}
+            required={true}
           />
         </div>
       </main>
@@ -68,7 +70,9 @@ export default function Editor({}) {
 }
 
 export async function action({ request }) {
+  const writeDate = new Date().toLocaleString();
   const formData = await request.formData();
+  formData.append("writeDate", writeDate);
   const postData = Object.fromEntries(formData);
   fetch("http://localhost:3000/posts", {
     method: "POST",

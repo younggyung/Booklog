@@ -3,14 +3,13 @@ import ReactDOM from "react-dom/client";
 import Posts, { loader as postsLoader } from "./routes/Posts.jsx";
 import "./index.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import NewPost, { action as newpostAction } from "./routes/NewPost.jsx";
 import RootLayout from "./routes/RootLayout.jsx";
 import PostDetail, {
   loader as postDetailLoader,
 } from "./routes/Postdetail.jsx";
-import Editor from "./routes/Editor.jsx";
+import Editor, {action as EditorAction} from "./routes/Editor.jsx";
 import BookSearch from "./routes/BookSearch.jsx";
-import UpdatePost, { action as updateAction } from "./routes/UpdatePost.jsx";
+import UpdatePost, { } from "./routes/UpdatePost.jsx";
 
 const router = createBrowserRouter([
   {
@@ -28,19 +27,18 @@ const router = createBrowserRouter([
       {
         path: "/newpost",
         element: <Editor />,
-        action: newpostAction,
+        action: EditorAction,
       },
       {
         path: "post/:id",
         element: <PostDetail />,
         id: "post",
         loader: postDetailLoader,
-        children: [],
       },
       {
         path: "post/:id/update",
         element: <UpdatePost />,
-        action: updateAction,
+        // action: updateAction,
         loader: postDetailLoader,
       },
     ],

@@ -14,7 +14,7 @@ function PostDetail() {
       <div className={classes.contents}>
         <div className={classes.title_area}>
           <h2>{post.title}</h2>
-          <span>{post.date}</span>
+          <span>{post.date + ' 읽음'}</span>
         </div>
         <div className={classes.body_area}>
           <p
