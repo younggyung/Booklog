@@ -19,7 +19,7 @@ function PostList() {
               <Post
                 key={Math.random()}
                 title={post.title}
-                body={post.body} //미리보기 250줄
+                body={post.body.replace(/(<([^>]+)>)/gi, "").slice(0,250)+' ...'} 
                 date={post.date}
                 id={post.id}
               />

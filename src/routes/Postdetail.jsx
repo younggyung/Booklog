@@ -1,9 +1,12 @@
 import { useLoaderData, useNavigate, Outlet } from "react-router-dom";
 import classes from "./PostDetail.module.css";
+import DOMPurify from 'isomorphic-dompurify';
+
 
 function PostDetail() {
   const post = useLoaderData();
   const navigate = useNavigate();
+
 
   return (
     <>
@@ -14,17 +17,21 @@ function PostDetail() {
           <span>{post.date}</span>
         </div>
         <div className={classes.body_area}>
-          <p>{post.body}</p>
+          <p
+            dangerouslySetInnerHTML={{
+              __html:DOMPurify.sanitize(post.body)
+            }}/>
+
         </div>
         <p>
-          <button
+          <button className={classes.buttons}
             onClick={(e) => {
-              navigate("update");
+              navigate('update');
             }}
           >
             수정
           </button>
-          <button
+          <button className={classes.buttons}
             onClick={(e) => {
               fetch("http://localhost:3000/posts/" + post.id, {
                 method: "DELETE",
