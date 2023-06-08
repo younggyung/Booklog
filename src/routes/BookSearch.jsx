@@ -6,9 +6,6 @@ import Modal from "../components/Modal";
 function BookSearch({ closeModal }) {
   const [data, setData] = useState([]);
   const [result , setResult] =useState(true);
-  console.log(data);
-  console.log(result);
-  
 
   async function getBookInfo(e) {
     e.preventDefault();

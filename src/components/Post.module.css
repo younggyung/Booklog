@@ -7,6 +7,9 @@
     margin-bottom: 30px;
 }
 
+.link:hover{
+  color: rgb(12, 129, 76);
+}
 
 .category{
   color: gray;
