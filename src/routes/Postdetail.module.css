@@ -6,7 +6,6 @@
 }
 
 .title_area {
-  justify-content: space-around;
   text-align: center;
   border-bottom: 1px solid rgb(214, 214, 214);
   padding-bottom: 20px;
@@ -14,12 +13,18 @@
 
 .body_area {
   padding: 1rem;
+  line-height: 1.7rem;
 }
 
 .buttons {
-  font-size: 15px;
+  padding: 10px;
+  font-size: 17px;
   float: right;
   background-color: white;
   border: none;
   cursor: pointer;
+}
+
+.buttons:hover{
+  font-weight: bold;
 }
