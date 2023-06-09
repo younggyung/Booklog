@@ -34,6 +34,10 @@
   color: gray;
 }
 
+.none {
+  width: 100%;
+}
+
 .more:hover {
   font-weight: bold;
 }

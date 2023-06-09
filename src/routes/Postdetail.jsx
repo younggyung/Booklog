@@ -24,6 +24,7 @@ function PostDetail() {
 
         </div>
         <p>
+
           <button className={classes.buttons}
             onClick={(e) => {
               navigate('update');
@@ -48,6 +49,14 @@ function PostDetail() {
             }}
           >
             삭제
+          </button>
+
+          <button className={classes.buttons}
+            onClick={(e) => {
+              navigate(-1);
+            }}
+          >
+            목록
           </button>
         </p>
       </div>
