@@ -6,9 +6,6 @@ import Modal from "../components/Modal";
 function BookSearch({ closeModal }) {
   const [data, setData] = useState([]);
   const [result , setResult] =useState(true);
-  console.log(data);
-  console.log(result);
-  
 
   async function getBookInfo(e) {
     e.preventDefault();
@@ -23,6 +20,10 @@ function BookSearch({ closeModal }) {
         "X-Naver-Client-Secret": client_secret,
       },
     });
+
+
+    //boolean 타입의 state 'Result' : 검색결과의 유무를 가려내기 위해 사용.
+    //검색결과가 1개 이상이면 true, 0개 이하면 false 값을 주어서 렌더링에 사용합니다.
     const resData = await response.json();
     if(resData.items.length > 0 ){
       setData(resData.items);
@@ -61,6 +62,7 @@ function BookSearch({ closeModal }) {
                   image={book.image}
                 />
               ))} 
+              {/*result가 false이면 검색결과가 없습니다 출력*/}
               {!result && "검색결과가 없습니다"}
             </ul>
           </div>

@@ -1,10 +1,14 @@
 import { useLoaderData } from "react-router-dom";
+import { useState } from "react";
 import Post from "./Post";
 import classes from "./PostList.module.css";
+import Pagination from "./Pagination";
 
 function PostList() {
   const posts = useLoaderData();
-  console.log(posts)
+  const [limit, setLimit] = useState(3);
+  const [page, setPage] = useState(1);
+  const offset = (page - 1) * limit;
 
   return (
     <>
@@ -16,13 +20,14 @@ function PostList() {
       )}
       {posts.length > 0 && (
         <ul className={classes.postlist}>
-          {posts.map((post) => (
+          {posts.slice(offset, offset + limit).map((post) => (
             <Post
               key={Math.random()}
               title={post.title}
               body={
                 post.body.length >= 200
-                  ? post.body.replace(/(<([^>]+)>)/gi, "").slice(0, 200)+' ...'
+                  ? post.body.replace(/(<([^>]+)>)/gi, "").slice(0, 200) +
+                    " ..."
                   : post.body.replace(/(<([^>]+)>)/gi, "")
               }
               date={post.date}
@@ -33,6 +38,12 @@ function PostList() {
           ))}
         </ul>
       )}
+      <Pagination
+        total={posts.length}
+        limit={limit}
+        page={page}
+        setPage={setPage}
+      />
     </>
   );
 }
