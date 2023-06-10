@@ -10,6 +10,7 @@ import PostDetail, {
 import Editor, {action as EditorAction} from "./routes/Editor.jsx";
 import BookSearch from "./routes/BookSearch.jsx";
 import UpdatePost, { } from "./routes/UpdatePost.jsx";
+import Login from "./routes/Login.jsx";
 
 const router = createBrowserRouter([
   {
@@ -41,8 +42,11 @@ const router = createBrowserRouter([
         // action: updateAction,
         loader: postDetailLoader,
       },
-    ],
-  },
+    ]},
+    {
+      path: "login",
+      element: <Login />,
+    }
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
