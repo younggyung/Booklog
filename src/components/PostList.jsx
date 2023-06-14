@@ -6,7 +6,7 @@ import Pagination from "./Pagination";
 
 function PostList() {
   const posts = useLoaderData();
-  const [limit, setLimit] = useState(3);
+  const [limit, setLimit] = useState(4);
   const [page, setPage] = useState(1);
   const offset = (page - 1) * limit;
 

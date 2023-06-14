@@ -6,6 +6,7 @@
     background-image: url(../assets/AdobeStock_398944209.jpeg);
     background-repeat: no-repeat ;
     background-size: cover;
+    background-position: 100%;
 }
 
 .loginDiv{
@@ -23,9 +24,36 @@
     margin-top: 0;
     color: white;
     font-size: 22pt;
+    font-style: italic;
     
 }
 
 .input{
     display: grid;
+    gap: 3px;
+    width: 200px;
+    height: 80px;
+}
+
+.input input{
+    font-size: 15px;
+}
+
+.input input:focus{
+    outline: 1px solid lightblue;
+}
+
+.input button{
+    background-color: aliceblue;
+    border : none;
+}
+
+.input button:hover{
+    background-color: rgb(52, 56, 56);
+}
+
+.signUp{
+    margin-top : 10px;
+    color: white;
+    font-size: 14px;
 }

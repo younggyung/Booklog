@@ -3,7 +3,7 @@ import classes from "./BookSearch.module.css";
 import BookContents from "../components/BookContents";
 import Modal from "../components/Modal";
 
-function BookSearch({ closeModal }) {
+function BookSearch() {
   const [data, setData] = useState([]);
   const [result , setResult] =useState(true);
 
@@ -35,7 +35,6 @@ function BookSearch({ closeModal }) {
   }
 
     return (
-      <Modal closeModal={closeModal}>
         <div className={classes.wrapper}>
           <div className={classes.form}>
             <form onSubmit={getBookInfo}>
@@ -67,7 +66,6 @@ function BookSearch({ closeModal }) {
             </ul>
           </div>
         </div>
-      </Modal>
     );
   }
 
