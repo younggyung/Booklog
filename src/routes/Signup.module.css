@@ -1,0 +1,33 @@
+
+.div{
+ background-color: none;
+display: flex;
+flex-direction: column;
+width: 400px;
+align-items: center;
+}
+
+.inputs{
+ display: flex;
+ flex-direction: column;
+ width: 220px;
+ gap: 5px;
+ margin-bottom: 50px;
+}
+
+.inputs input{
+ outline: none;;
+ height: 20px;
+}
+
+.inputs button{
+ color: black;
+ background-color: white;
+ border: 1px solid black
+}
+
+.inputs button:hover{
+ color:white;
+ background-color: black;
+ border: 1px solid black
+}

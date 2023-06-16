@@ -42,11 +42,10 @@ const router = createBrowserRouter([
         // action: updateAction,
         loader: postDetailLoader,
       },
-    ]},
-    {
-      path: "login",
-      element: <Login />,
-    }
+      {
+        path: "login",
+        element: <Login />,
+      } ]},
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
