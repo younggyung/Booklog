@@ -31,3 +31,7 @@ align-items: center;
  background-color: black;
  border: 1px solid black
 }
+
+.warning{
+    color:darkblue;
+}
