@@ -57,3 +57,7 @@
     color: white;
     font-size: 14px;
 }
+
+.signUp:hover{
+    font-weight: bold;
+}

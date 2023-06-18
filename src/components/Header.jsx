@@ -3,10 +3,10 @@ import { MdPostAdd, MdOutlineLogin, MdSearch } from "react-icons/md";
 import { Link } from "react-router-dom";
 import BookSearch from "../routes/BookSearch";
 import Modal from "./Modal";
-import { useState } from 'react';
+import { useState, useEffect } from "react";
+import firebase from "../firebase";
 
 function Header() {
-
   const [isOpen, setIsOpen] = useState(false);
   const openModal = () => {
     setIsOpen(true);
@@ -15,6 +15,25 @@ function Header() {
     setIsOpen(false);
   };
 
+  const logoutHandler = () => {
+    const logoutConfirm = confirm("로그아웃 하시겠습니까?");
+    if (logoutConfirm) {
+      firebase.auth().signOut();
+    }
+  };
+
+  const [user, setUser] = useState();
+  console.log(user);
+
+  useEffect(() => {
+    const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
+      setUser(user);
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
 
   return (
     <header className={classes.header}>
@@ -35,16 +54,21 @@ function Header() {
           </a>
         </li>
         <li>
-          <Link type="button" to="/login">
-            <MdOutlineLogin />
-            로그인
-          </Link>
+          {user ? (
+            <a onClick={logoutHandler}>
+              <MdOutlineLogin />
+              로그아웃
+            </a>
+          ) : (
+            <Link type="button" to="/login">
+              <MdOutlineLogin />
+              로그인
+            </Link>
+          )}
         </li>
       </ul>
       {isOpen && (
-        <Modal
-          closeModal={closeModal}
-        >
+        <Modal closeModal={closeModal}>
           <BookSearch />
         </Modal>
       )}

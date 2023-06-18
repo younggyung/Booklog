@@ -1,12 +1,20 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import classes from "./Login.module.css";
-import { Link, useOutletContext, useSearchParams } from "react-router-dom";
-import { auth } from "../firebase";
 import SignUp from "./SignUp";
 import Modal from "../components/Modal";
+import firebase from "../firebase";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
-  const [id, setId] = useState();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // 유지 정책 설정
+    firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
+  }, []);
+
+
+  const [email, setemail] = useState();
   const [password, setPassword] = useState();
   //const { isOpen, openModal, closeModal } = useOutletContext();
 
@@ -20,6 +28,19 @@ function Login() {
     setIsOpen(false);
   };
 
+  const loginHandler = async (e) =>{
+    e.preventDefault();
+    try {
+      await firebase.auth().signInWithEmailAndPassword(email, password);
+      alert("환영합니다");
+      navigate('/')
+
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  
+
   return (
     <>
     {isOpen && 
@@ -29,15 +50,16 @@ function Login() {
     }
     <div className={classes.container}>
       <section className={classes.loginDiv}>
-          <p className={classes.logo}>(제작중)Dive into your Ocean</p>
-          <form>
+          <p className={classes.logo}>Dive into your Ocean</p>
+          <form onSubmit={loginHandler}>
             <div className={classes.input}>
               <input
                 type="text"
-                onChange={(e) => setId(e.target.value)}
-                autoComplete='id'
+                onChange={(e) => setemail(e.target.value)}
+                autoComplete="email"
+                placeholder="이메일@email.com"
               ></input>
-              <input type="password" autoComplete="current-password"></input>
+              <input type="password" autoComplete="current-password" onChange={(e)=>setPassword(e.target.value)} placeholder="비밀번호"></input>
               <button>로그인</button>
             </div>
             <p onClick={openModal} className={classes.signUp}>계정이 없으신가요?</p>
