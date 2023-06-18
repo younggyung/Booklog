@@ -51,7 +51,7 @@ function UpdatePost() {
 
     function submitHandler(e) {
     e.preventDefault();
-    fetch("http://localhost:3000/posts/" + data.id, {
+    fetch("https://seed-foggy-apartment.glitch.me/posts/" + data.id, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

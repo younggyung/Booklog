@@ -34,7 +34,7 @@ function PostDetail() {
           </button>
           <button className={classes.buttons}
             onClick={(e) => {
-              fetch("http://localhost:3000/posts/" + post.id, {
+              fetch("https://seed-foggy-apartment.glitch.me/posts" + post.id, {
                 method: "DELETE",
               })
                 .then((response) => {

@@ -74,7 +74,7 @@ export async function action({ request }) {
   const formData = await request.formData();
   formData.append("writeDate", writeDate);
   const postData = Object.fromEntries(formData);
-  fetch("http://localhost:3000/posts", {
+  fetch("https://seed-foggy-apartment.glitch.me/posts", {
     method: "POST",
     body: JSON.stringify(postData),
     headers: {
