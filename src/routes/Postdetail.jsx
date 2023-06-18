@@ -1,5 +1,5 @@
 import { useLoaderData, useNavigate, Outlet } from "react-router-dom";
-import classes from "./PostDetail.module.css";
+import classes from "./Postdetail.module.css";
 import DOMPurify from 'isomorphic-dompurify';
 
 

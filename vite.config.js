@@ -10,7 +10,7 @@ export default defineConfig({
         target: 'https://openapi.naver.com', 
         changeOrigin: true,
         rewrite: path => path.replace(/^\/api/, ''),
-        secure: false,
+        secure: true,
         ws: true,
       },
     },
