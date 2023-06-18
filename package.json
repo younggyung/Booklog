@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && json-server --watch ./dist/fake-server/json-server/db.json",
+    "build": "vite build && json-server --watch ./opt/dist/repo/fake-server/json-server/db.json",
     "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
