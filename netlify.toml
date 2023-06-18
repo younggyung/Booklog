@@ -1,6 +1,0 @@
-[build]
-  command = "npm run build && json-server --watch db.json"
-  publish = "dist"
-  functions = "functions"
-  runtime = "base-directory-name" # 런타임 이름 설정
-  base = "src" # 기본 디렉토리 경로 설정
