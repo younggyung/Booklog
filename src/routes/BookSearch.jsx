@@ -12,8 +12,8 @@ function BookSearch() {
     const keyword = document.getElementById("keyword").value;
     var client_id = "25TA5VMG3g5PmlQtXotf";
     var client_secret = "JAuax3gT0H";
-    // const PROXY = window.location.hostname === 'localhost'? '':'/proxy';
-    const response = await fetch(`/v1/search/book.json?query=` + keyword, {
+    const PROXY = window.location.hostname === 'localhost'? '':'/proxy';
+    const response = await fetch(`${PROXY}/v1/search/book.json?query=` + keyword, {
       method: "GET",
       headers: {
         "Content-Type": "application.json",
