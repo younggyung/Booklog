@@ -9,7 +9,7 @@ import PostDetail, {
 } from "./routes/Postdetail.jsx";
 import Editor, {action as EditorAction} from "./routes/Editor.jsx";
 import BookSearch from "./routes/BookSearch.jsx";
-import UpdatePost, { } from "./routes/UpdatePost.jsx";
+import UpdatePost from "./routes/UpdatePost.jsx";
 import Login from "./routes/Login.jsx";
 
 const router = createBrowserRouter([
@@ -39,7 +39,6 @@ const router = createBrowserRouter([
       {
         path: "post/:id/update",
         element: <UpdatePost />,
-        // action: updateAction,
         loader: postDetailLoader,
       },
       {

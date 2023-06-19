@@ -81,5 +81,5 @@ export async function action({ request }) {
       "Content-Type": "application/json",
     },
   });
-  return redirect("/");
+  return redirect('/');
 }

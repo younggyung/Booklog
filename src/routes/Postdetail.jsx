@@ -34,7 +34,9 @@ function PostDetail() {
           </button>
           <button className={classes.buttons}
             onClick={(e) => {
-              fetch("https://seed-foggy-apartment.glitch.me/posts" + post.id, {
+             const confirmDelete =  confirm('삭제하시겠습니까?')
+              if(confirmDelete){
+              fetch("https://seed-foggy-apartment.glitch.me/posts/" + post.id, {
                 method: "DELETE",
               })
                 .then((response) => {
@@ -46,6 +48,7 @@ function PostDetail() {
                 .catch((e) => {
                   console.log(e);
                 });
+              }
             }}
           >
             삭제
@@ -66,7 +69,7 @@ function PostDetail() {
 
 export default PostDetail;
 export async function loader({ params }) {
-  const response = await fetch("http://localhost:3000/posts/" + params.id);
+  const response = await fetch("https://seed-foggy-apartment.glitch.me/posts/" + params.id);
   const resData = await response.json();
   return resData;
 }
