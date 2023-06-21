@@ -21,11 +21,15 @@
 }
 
 .logo{
-    margin-top: 0;
+    font-family: 'logoFont';
     color: white;
-    font-size: 22pt;
-    font-style: italic;
-    
+    font-size: 50pt; 
+    margin:0;
+}
+
+.slogan{
+    color:white;
+    animation: sloganAnimation 1s alternate-reverse  infinite  ease-in-out;
 }
 
 .input{
@@ -60,4 +64,13 @@
 
 .signUp:hover{
     font-weight: bold;
+}
+
+@keyframes sloganAnimation{
+    from{
+        opacity: 0.5;
+    }
+    to{
+        opacity: 1;
+    }
 }

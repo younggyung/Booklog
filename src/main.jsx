@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import Posts, { loader as postsLoader } from "./routes/Posts.jsx";
+import Posts from "./routes/Posts.jsx";
 import "./index.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import RootLayout from "./routes/RootLayout.jsx";
@@ -11,6 +11,7 @@ import Editor, {action as EditorAction} from "./routes/Editor.jsx";
 import BookSearch from "./routes/BookSearch.jsx";
 import UpdatePost from "./routes/UpdatePost.jsx";
 import Login from "./routes/Login.jsx";
+import { loader as postsLoader } from "./components/PostList.jsx";
 
 const router = createBrowserRouter([
   {

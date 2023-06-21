@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import classes from "./Login.module.css";
 import SignUp from "./SignUp";
 import Modal from "../components/Modal";
-import firebase from "../firebase";
+import {auth} from "../firebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
@@ -10,13 +11,13 @@ function Login() {
 
   useEffect(() => {
     // 유지 정책 설정
-    firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
+    auth.setPersistence(auth.browserSessionPersistence);
   }, []);
 
 
   const [email, setemail] = useState();
   const [password, setPassword] = useState();
-  //const { isOpen, openModal, closeModal } = useOutletContext();
+
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -31,7 +32,7 @@ function Login() {
   const loginHandler = async (e) =>{
     e.preventDefault();
     try {
-      await firebase.auth().signInWithEmailAndPassword(email, password);
+      await signInWithEmailAndPassword(auth,email, password);
       alert("환영합니다");
       navigate('/')
 
@@ -45,12 +46,13 @@ function Login() {
     <>
     {isOpen && 
       <Modal closeModal={closeModal}>
-        <SignUp />
+        <SignUp closeModal={closeModal}/>
       </Modal>
     }
     <div className={classes.container}>
       <section className={classes.loginDiv}>
           <p className={classes.logo}>Dive into your Ocean</p>
+          <p className={classes.slogan}>이제, 당신만의 세계로 푹 빠져드는거에요.</p>
           <form onSubmit={loginHandler}>
             <div className={classes.input}>
               <input

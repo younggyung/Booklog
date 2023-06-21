@@ -4,9 +4,39 @@ import { Link } from "react-router-dom";
 import BookSearch from "../routes/BookSearch";
 import Modal from "./Modal";
 import { useState, useEffect } from "react";
-import firebase from "../firebase";
+import {auth,db} from "../firebase";
+import { doc, getDoc } from "firebase/firestore";
 
 function Header() {
+
+  const [nickname,setNickame] = useState();
+
+   //로그인 검증
+   const currentUser = auth.currentUser;
+   if (currentUser) {
+     const userId = currentUser.uid;
+     fetchNickname(userId)
+   }
+   
+
+  //닉네임 가져오기
+  async function fetchNickname (userId) {
+    try {
+      const userDocRef = doc(db, "users", userId);
+      const userDocSnap = await getDoc(userDocRef);
+      if (userDocSnap.exists()) {
+        const userData = userDocSnap.data();
+        setNickame(userData.nickname);
+      } else {
+        // 문서가 존재하지 않음
+        console.log("해당 사용자의 문서가 존재하지 않습니다.");
+      }
+    } catch (error) {
+      console.log("닉네임 가져오기 실패:", error);
+    }
+  };
+  
+
   const [isOpen, setIsOpen] = useState(false);
   const openModal = () => {
     setIsOpen(true);
@@ -18,15 +48,15 @@ function Header() {
   const logoutHandler = () => {
     const logoutConfirm = confirm("로그아웃 하시겠습니까?");
     if (logoutConfirm) {
-      firebase.auth().signOut();
+      auth.signOut();
     }
   };
 
   const [user, setUser] = useState();
-  console.log(user);
+
 
   useEffect(() => {
-    const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
       setUser(user);
     });
 
@@ -57,7 +87,7 @@ function Header() {
           {user ? (
             <a onClick={logoutHandler}>
               <MdOutlineLogin />
-              로그아웃
+              {nickname}
             </a>
           ) : (
             <Link type="button" to="/login">

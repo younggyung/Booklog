@@ -56,7 +56,7 @@ function PostDetail() {
 
           <button className={classes.buttons}
             onClick={(e) => {
-              navigate(-1);
+              navigate('/');
             }}
           >
             목록

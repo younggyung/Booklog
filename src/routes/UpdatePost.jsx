@@ -4,11 +4,11 @@ import { useState, useMemo } from "react";
 import ReactQuill from "react-quill";
 
 function UpdatePost() {
-  const originPost = useLoaderData();
   const navigate = useNavigate();
+  
+  //loader로 기존의 데이터를 받아와 date에 초깃값으로 세팅
+  const originPost = useLoaderData();
   const [data,setData] = useState(originPost);
-  console.log(data)
-
 
   const cancel = ()=>{
     navigate('..');
@@ -27,6 +27,7 @@ function UpdatePost() {
     ],
   }));
 
+  // 수정 핸들러
 
   const titleHandler=(e)=>{
     const title = e.target.value;
@@ -51,14 +52,20 @@ function UpdatePost() {
 
     function submitHandler(e) {
     e.preventDefault();
+    console.log('전송')
     fetch("https://seed-foggy-apartment.glitch.me/posts/" + data.id, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data)
+    }).then(response => response.json())
+    .then(data => {
+      navigate(`/post/${data.id}`);
+    })
+    .catch(error => {
+      console.error("게시글 수정 중 오류가 발생했습니다.", error);
     });
-    window.location.href = "/post/" + data.id;
   }
 
 
@@ -92,7 +99,6 @@ function UpdatePost() {
             defaultValue={originPost.title}
             onChange={titleHandler}
           />
-          {/* <input type="hidden" name="body" value={body} /> */}
         </div>
         <div className={classes.editorContainer}>
           <ReactQuill
@@ -107,7 +113,7 @@ function UpdatePost() {
         </div>
       </main>
       <div className={classes.footer}>
-        <button type="submit">작성완료</button>
+        <button>작성완료</button>
         <button onClick={cancel}>취소</button>
       </div>
     </form>
@@ -115,18 +121,3 @@ function UpdatePost() {
 }
 
 export default UpdatePost;
-// export async function action({ request, params }) {
-//   const formData = await request.formData();
-//   formData.append('body',body)
-//   const updates = Object.fromEntries(formData);
-  
-//   fetch("http://localhost:3000/posts/" + params.id, {
-//     method: "PUT",
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//     body: JSON.stringify(updates),
-//   });
-//   window.location.href = "/post/" + params.id;
-//   return null;
-// }

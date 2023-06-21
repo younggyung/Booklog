@@ -45,7 +45,7 @@ export default function Editor({}) {
             placeholder="제목을 입력하세요"
             className={classes.titleInput}
           />
-          <input type="hidden" name="body" value={body} />
+          {/* <input type="hidden" name="body" value={body} /> */}
         </div>
         <div className={classes.editorContainer}>
           <ReactQuill
