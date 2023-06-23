@@ -1,10 +1,11 @@
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { useState, useRef, useMemo } from "react";
-import { Form,redirect } from "react-router-dom";
+import { Form,redirect,useNavigate } from "react-router-dom";
 import classes from "./Editor.module.css";
 
 export default function Editor({}) {
+  const navigate = useNavigate();
   const quillRef = useRef();
   const [body, setBody] = useState();
 
@@ -45,7 +46,7 @@ export default function Editor({}) {
             placeholder="제목을 입력하세요"
             className={classes.titleInput}
           />
-          {/* <input type="hidden" name="body" value={body} /> */}
+          <input type="hidden" name="body" value={body} />
         </div>
         <div className={classes.editorContainer}>
           <ReactQuill
@@ -63,7 +64,7 @@ export default function Editor({}) {
       </main>
       <div className={classes.footer}>
         <button type="submit">작성완료</button>
-        <button>취소</button>
+        <button type='button' onClick={()=>{navigate('..')}}>취소</button>
       </div>
     </Form>
   );

@@ -1,41 +1,32 @@
 import classes from "./Header.module.css";
 import { MdPostAdd, MdOutlineLogin, MdSearch } from "react-icons/md";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import BookSearch from "../routes/BookSearch";
 import Modal from "./Modal";
 import { useState, useEffect } from "react";
-import {auth,db} from "../firebase";
+import { auth, db } from "../firebase";
 import { doc, getDoc } from "firebase/firestore";
+import { onAuthStateChanged } from "firebase/auth";
 
 function Header() {
-
-  const [nickname,setNickame] = useState();
-
-   //로그인 검증
-   const currentUser = auth.currentUser;
-   if (currentUser) {
-     const userId = currentUser.uid;
-     fetchNickname(userId)
-   }
-   
+  const [nickname, setNickname] = useState();
+  const navigate = useNavigate();
 
   //닉네임 가져오기
-  async function fetchNickname (userId) {
+  async function fetchNickname(userId) {
     try {
       const userDocRef = doc(db, "users", userId);
       const userDocSnap = await getDoc(userDocRef);
       if (userDocSnap.exists()) {
         const userData = userDocSnap.data();
-        setNickame(userData.nickname);
+        setNickname(userData.nickname);
       } else {
-        // 문서가 존재하지 않음
         console.log("해당 사용자의 문서가 존재하지 않습니다.");
       }
     } catch (error) {
       console.log("닉네임 가져오기 실패:", error);
     }
-  };
-  
+  }
 
   const [isOpen, setIsOpen] = useState(false);
   const openModal = () => {
@@ -48,22 +39,26 @@ function Header() {
   const logoutHandler = () => {
     const logoutConfirm = confirm("로그아웃 하시겠습니까?");
     if (logoutConfirm) {
+      setNickname(null);
       auth.signOut();
     }
   };
 
-  const [user, setUser] = useState();
-
-
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      setUser(user);
-    });
-
-    return () => {
-      unsubscribe();
+    onAuthStateChanged(auth, (user) => {
+      //유저의 메타데이터에서 계정 생성 시간과 최종 로그인 시간을 비교해서, 회원가입시에 자동로그인 되는 현상 방지
+      if (user) {
+        //user 정보가 있지만, 회원가입으로 인한 유저인증 상태가 아닐때 (=로그인했을때)
+        if (user.metadata.creationTime !== user.metadata.lastSignInTime) {
+          fetchNickname(user.uid);
+        //회원가입했을때, 인증을 해제하고 로그인 페이지로
+        } else {
+        auth.signOut();
+        navigate("/login");
+      }
     };
-  }, []);
+
+})}, []);
 
   return (
     <header className={classes.header}>
@@ -72,7 +67,7 @@ function Header() {
       </Link>
       <ul className={classes.menus}>
         <li>
-          <Link type="button" to="/newpost">
+          <Link type="button" to={nickname ? "/newpost" : "/login"}>
             <MdPostAdd size={18} />
             글쓰기
           </Link>
@@ -84,7 +79,7 @@ function Header() {
           </a>
         </li>
         <li>
-          {user ? (
+          {nickname ? (
             <a onClick={logoutHandler}>
               <MdOutlineLogin />
               {nickname}
@@ -105,4 +100,5 @@ function Header() {
     </header>
   );
 }
+
 export default Header;

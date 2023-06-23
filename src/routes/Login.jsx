@@ -3,15 +3,15 @@ import classes from "./Login.module.css";
 import SignUp from "./SignUp";
 import Modal from "../components/Modal";
 import {auth} from "../firebase";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { setPersistence, signInWithEmailAndPassword,browserSessionPersistence } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // 유지 정책 설정
-    auth.setPersistence(auth.browserSessionPersistence);
+    // 유지 정책 설정..
+    setPersistence(auth,browserSessionPersistence);
   }, []);
 
 

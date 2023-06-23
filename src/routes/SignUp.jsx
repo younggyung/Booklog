@@ -3,12 +3,13 @@ import classes from "./Signup.module.css";
 import {auth,db}  from '../firebase'
 import { useNavigate } from "react-router-dom";
 import { collection, setDoc,doc } from "firebase/firestore";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword,signInWithEmailAndPassword } from "firebase/auth";
 
 function SignUp({closeModal}) {
   const [password, setPassword] = useState(1);
   const [email, setEmail] = useState();
   const [nickname, setNickname] = useState();
+  const navigate = useNavigate();
 
   //firebase를 통한 사용자 등록
   const signUpHandler = async (e) => {
@@ -16,14 +17,15 @@ function SignUp({closeModal}) {
     try {
       //이메일,패스워드 등록
       const userCredential = await createUserWithEmailAndPassword(auth,email, password);
-      const user = userCredential.user;
       //Firestore에 닉네임 추가
-      await setDoc(doc(collection(db, "users"), user.uid),
+      await setDoc(doc(collection(db, "users"), userCredential.user.uid),
       {
         nickname: nickname
       });
       alert(email + "계정으로 회원가입되었습니다.");
+      auth.signOut()
       closeModal();
+      navigate('/login')
 
     } catch (error) {
       //이메일 사용 검증
