@@ -12,7 +12,7 @@ function Header() {
   const [nickname, setNickname] = useState();
   const navigate = useNavigate();
 
-  //닉네임 가져오기
+  //닉네임 가져오기, fetchNickname은 user 정보가 있을때만 실행된다. 즉, nickname의 유무는 인증유무와 동일
   async function fetchNickname(userId) {
     try {
       const userDocRef = doc(db, "users", userId);
