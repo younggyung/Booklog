@@ -6,6 +6,7 @@ import {auth} from "../firebase";
 import { setPersistence, signInWithEmailAndPassword,browserSessionPersistence } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 
+
 function Login() {
   const navigate = useNavigate();
 
@@ -15,10 +16,8 @@ function Login() {
   }, []);
 
 
-  const [email, setemail] = useState();
+  const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-
-
   const [isOpen, setIsOpen] = useState(false);
 
   const openModal = () => {
@@ -57,7 +56,7 @@ function Login() {
             <div className={classes.input}>
               <input
                 type="text"
-                onChange={(e) => setemail(e.target.value)}
+                onChange={(e) => setEmail(e.target.value)}
                 autoComplete="email"
                 placeholder="이메일@email.com"
               ></input>

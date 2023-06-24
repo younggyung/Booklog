@@ -7,6 +7,8 @@ import { useState, useEffect } from "react";
 import { auth, db } from "../firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
+import store from '../store';
+import { loginSuccess,logoutSuccess } from "../authSlice";
 
 function Header() {
   const [nickname, setNickname] = useState();
@@ -41,8 +43,10 @@ function Header() {
     if (logoutConfirm) {
       setNickname(null);
       auth.signOut();
+      store.dispatch(logoutSuccess());
     }
   };
+
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -51,6 +55,7 @@ function Header() {
         //user 정보가 있지만, 회원가입으로 인한 유저인증 상태가 아닐때 (=로그인했을때)
         if (user.metadata.creationTime !== user.metadata.lastSignInTime) {
           fetchNickname(user.uid);
+          store.dispatch(loginSuccess(user));
         //회원가입했을때, 인증을 해제하고 로그인 페이지로
         } else {
         auth.signOut();

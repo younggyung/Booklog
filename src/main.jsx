@@ -7,7 +7,8 @@ import RootLayout from "./routes/RootLayout.jsx";
 import PostDetail, {
   loader as postDetailLoader,
 } from "./routes/Postdetail.jsx";
-import Editor, {action as EditorAction} from "./routes/Editor.jsx";
+// import Editor, {action as EditorAction} from "./routes/Editor.jsx";
+import Editor from "./routes/Editor.jsx";
 import BookSearch from "./routes/BookSearch.jsx";
 import UpdatePost from "./routes/UpdatePost.jsx";
 import Login from "./routes/Login.jsx";
@@ -28,8 +29,8 @@ const router = createBrowserRouter([
       },
       {
         path: "/newpost",
-        element: <Editor />,
-        action: EditorAction,
+        element: <Editor/>,
+        //action: EditorAction,
       },
       {
         path: "post/:id",
