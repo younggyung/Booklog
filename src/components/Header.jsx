@@ -14,14 +14,15 @@ function Header() {
   const [nickname, setNickname] = useState();
   const navigate = useNavigate();
 
-  //닉네임 가져오기, fetchNickname은 user 정보가 있을때만 실행된다. 즉, nickname의 유무는 인증유무와 동일
+  //닉네임 가져오기, fetchNickname은 user 정보가 있을때만 실행된 다. 즉, nickname의 유무는 인증유무와 동일
+
   async function fetchNickname(userId) {
     try {
       const userDocRef = doc(db, "users", userId);
       const userDocSnap = await getDoc(userDocRef);
       if (userDocSnap.exists()) {
         const userData = userDocSnap.data();
-        setNickname(userData.nickname);
+        return userData.nickname;
       } else {
         console.log("해당 사용자의 문서가 존재하지 않습니다.");
       }
@@ -54,8 +55,7 @@ function Header() {
       if (user) {
         //user 정보가 있지만, 회원가입으로 인한 유저인증 상태가 아닐때 (=로그인했을때)
         if (user.metadata.creationTime !== user.metadata.lastSignInTime) {
-          fetchNickname(user.uid);
-          store.dispatch(loginSuccess(user));
+          fetchNickname(user.uid).then((nickname)=>{store.dispatch(loginSuccess({user:user,nickname:nickname}))})
         //회원가입했을때, 인증을 해제하고 로그인 페이지로
         } else {
         auth.signOut();

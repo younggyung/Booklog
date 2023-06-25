@@ -1,9 +1,10 @@
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { useState, useMemo } from "react";
-import { Form, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import classes from "./Editor.module.css";
 import { useSelector } from "react-redux";
+
 
 export default function Editor() {
   const navigate = useNavigate();
@@ -13,10 +14,15 @@ export default function Editor() {
   const [title, setTitle] = useState();
   const [date, setDate] = useState();
   const [category, setCategory] = useState();
-  
 
-  //유저 정보
+  //유저 uid
   const user = useSelector((state) => state.auth.user);
+  //유저 닉네임
+  const nickname = useSelector((state) => state.auth.nickname);
+
+  console.log('user',user);
+  console.log('nickname',nickname);
+
 
   const modules = useMemo(() => ({
     toolbar: [
@@ -34,36 +40,41 @@ export default function Editor() {
 
   const posting = async (e) => {
     e.preventDefault();
-    const formData = new FormData();
     const writeDate = new Date().toLocaleString();
-    formData.append("title", title);
-    formData.append("date", date);
-    formData.append("body", body);
-    formData.append("writeDate", writeDate);
-    formData.append("writer", user);
-    formData.append("category", category);
-    const jsonData = Object.fromEntries(formData.entries())
+    const data = {
+      title: title,
+      date: date,
+      body: body,
+      writeDate: writeDate,
+      writer: user,
+      category: category,
+    };
+
     await fetch("https://seed-foggy-apartment.glitch.me/posts", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(jsonData)
-    }).then(response => response.json())
-    .then(data => {
-      navigate(`/post/${data.id}`);
+      body: JSON.stringify(data),
     })
-    .catch(error => {
-      console.error("게시글 작성 중 오류가 발생했습니다.", error);
-    });
+      .then((response) => response.json())
+      .then((data) => {
+        navigate(`/post/${data.id}`);
+      })
+      .catch((error) => {
+        console.error("게시글 작성 중 오류가 발생했습니다.", error);
+      });
   };
 
-  console.log(title,date,category,body)
   return (
     <form method="POST" onSubmit={posting}>
       <main className={classes.main}>
         <div className={classes.editorHead}>
-          <select name="category" required onChange={(e)=>setCategory(e.target.value)}>
+          <select
+            name="category"
+            required
+            onChange={(e) => setCategory(e.target.value)}
+          >
             <option value="카테고리없음">카테고리</option>
             <option value="문학">문학</option>
             <option value="인문">인문</option>
@@ -78,7 +89,7 @@ export default function Editor() {
               name="date"
               className={classes.date}
               required
-              onChange={(e)=>setDate(e.target.value)}
+              onChange={(e) => setDate(e.target.value)}
             />
           </label>
           <input
@@ -87,7 +98,7 @@ export default function Editor() {
             name="title"
             placeholder="제목을 입력하세요"
             className={classes.titleInput}
-            onChange={(e)=>setTitle(e.target.value)}
+            onChange={(e) => setTitle(e.target.value)}
           />
         </div>
         <div className={classes.editorContainer}>
@@ -96,7 +107,7 @@ export default function Editor() {
             placeholder="내용을 입력해주세요."
             theme="snow"
             style={{ height: "500px" }}
-            onChange={(e)=>setBody(e)}
+            onChange={(e) => setBody(e)}
             required={true}
           />
         </div>

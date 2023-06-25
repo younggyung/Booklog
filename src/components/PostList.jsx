@@ -32,7 +32,7 @@ function PostList() {
     <>
       {isLoading && (
         <h3 className={classes.loading}>
-          잠시만요! 데이터를 받아오고 있어요<span className={classes.loadingAnimation}></span>
+          잠시만요! 데이터를 받아오고 있어요😉 조금 느리지만 착한친구랍니다<span className={classes.loadingAnimation}></span>
         </h3>
       )}
       {!isLoading && posts.length === 0 && (
