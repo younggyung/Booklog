@@ -32,7 +32,7 @@ function PostList() {
     <>
       {isLoading && (
         <h3 className={classes.loading}>
-          잠시만요! 데이터를 받아오고 있어요😉 조금 느리지만 착한친구랍니다<span className={classes.loadingAnimation}></span>
+          데이터를 받아오고 있어요(최대1분)<span className={classes.loadingAnimation}></span>
         </h3>
       )}
       {!isLoading && posts.length === 0 && (
@@ -58,6 +58,7 @@ function PostList() {
                 id={post.id}
                 category={post.category}
                 writeDate={post.writeDate}
+                nickname={post.nickname}
               />
             ))}
           </ul>

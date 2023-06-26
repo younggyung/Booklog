@@ -22,6 +22,9 @@ function Header() {
       const userDocSnap = await getDoc(userDocRef);
       if (userDocSnap.exists()) {
         const userData = userDocSnap.data();
+        //헤더에 닉네임 표시
+        setNickname(userData.nickname)
+        //스토어에 닉네임 전달
         return userData.nickname;
       } else {
         console.log("해당 사용자의 문서가 존재하지 않습니다.");

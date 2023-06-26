@@ -1,11 +1,11 @@
 import classes from "./Editor.module.css";
-import { Form,redirect,useLoaderData, useNavigate } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import { useState, useMemo } from "react";
 import ReactQuill from "react-quill";
 
 function UpdatePost() {
   const navigate = useNavigate();
-  
+
   //loader로 기존의 데이터를 받아와 date에 초깃값으로 세팅
   const originPost = useLoaderData();
   const [data,setData] = useState(originPost);

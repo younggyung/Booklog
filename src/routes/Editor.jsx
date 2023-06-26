@@ -15,14 +15,10 @@ export default function Editor() {
   const [date, setDate] = useState();
   const [category, setCategory] = useState();
 
-  //유저 uid
+  //user = firebase 유저 객체
   const user = useSelector((state) => state.auth.user);
   //유저 닉네임
   const nickname = useSelector((state) => state.auth.nickname);
-
-  console.log('user',user);
-  console.log('nickname',nickname);
-
 
   const modules = useMemo(() => ({
     toolbar: [
@@ -47,6 +43,7 @@ export default function Editor() {
       body: body,
       writeDate: writeDate,
       writer: user,
+      nickname : nickname,
       category: category,
     };
 
