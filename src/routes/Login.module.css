@@ -48,12 +48,14 @@
 }
 
 .input button{
+    font-size: 11pt;
     background-color: aliceblue;
     border : none;
 }
 
 .input button:hover{
-    background-color: rgb(52, 56, 56);
+    color : white;
+    background-color: rgb(0, 0, 0);
 }
 
 .signUp{

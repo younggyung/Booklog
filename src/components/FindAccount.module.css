@@ -1,0 +1,37 @@
+.div {
+  background-color: none;
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  align-items: center;
+}
+
+.div p {
+  padding: 1em;
+}
+
+.input {
+  display: flex;
+  flex-direction: column;
+  width: 220px;
+  gap: 5px;
+  margin-bottom: 50px;
+}
+
+.input input {
+  outline: none;
+  height: 20px;
+}
+
+.input button {
+  font-size: 11pt;
+  color: black;
+  background-color: white;
+  border: 1px solid black;
+}
+
+.input button:hover {
+  color: white;
+  background-color: black;
+  border: 1px solid black;
+}

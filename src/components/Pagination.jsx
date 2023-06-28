@@ -1,7 +1,13 @@
+import { useEffect } from "react";
 import classes from "./Pagination.module.css";
 
 function Pagination({ total, limit, page, setPage }) {
+
     const numPages = Math.ceil(total / limit);
+
+    useEffect(()=>{
+      window.scrollTo(0,0)
+    },[page])
   
     return (
       <>

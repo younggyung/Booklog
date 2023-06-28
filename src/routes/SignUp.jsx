@@ -9,7 +9,9 @@ function SignUp({closeModal}) {
   const [password, setPassword] = useState(1);
   const [email, setEmail] = useState();
   const [nickname, setNickname] = useState();
+  const [warning,setWarning] = useState();
   const navigate = useNavigate();
+  const [errorIstrue,setErrorIstrue] = useState(false);
 
   //firebase를 통한 사용자 등록
   const signUpHandler = async (e) => {
@@ -28,20 +30,15 @@ function SignUp({closeModal}) {
       navigate('/login')
 
     } catch (error) {
+      setErrorIstrue(true);
       //이메일 사용 검증
       if (error.code === "auth/email-already-in-use") {
-        document.getElementById("warning").innerHTML =
-          "해당 이메일은 이미 사용 중입니다.";
-        document.getElementById("warning").hidden = false;
+        setWarning("해당 이메일은 이미 사용 중입니다.")
         //비밀번호 자리수 검증
       } else if (error.code === "auth/weak-password") {
-        document.getElementById("warning").innerHTML =
-          "비밀번호는 6글자 이상이여야 합니다.";
-        document.getElementById("warning").hidden = false;
+        setWarning("비밀번호는 6글자 이상이여야 합니다.")
       } else if (error.code === "auth/invalid-email") {
-        document.getElementById("warning").innerHTML =
-          "이메일 양식을 다시 확인해주세요.";
-        document.getElementById("warning").hidden = false;
+        setWarning("이메일 양식을 다시 확인해주세요.")
       }else{
         console.log(error)
       }
@@ -78,7 +75,7 @@ function SignUp({closeModal}) {
             }}
             required
           />
-          <p className={classes.warning} id="warning" hidden></p>
+          {errorIstrue && <p>{warning}</p>}
           <button>완료</button>
         </div>
       </form>

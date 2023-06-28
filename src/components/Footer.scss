@@ -1,0 +1,19 @@
+// 스타일 변수 정의
+$footerBackgroundColor: white;
+$footerPadding: 30px;
+$footerTextColor: #00000079;
+
+// 푸터 스타일
+.footer {
+  background-color: $footerBackgroundColor;
+  padding: $footerPadding;
+  text-align: center;
+  bottom: -100px;
+  width: 100%;
+  position: relative;
+
+  p {
+    font-size: 14px;
+    color: $footerTextColor;
+  }
+}

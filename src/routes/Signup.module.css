@@ -21,6 +21,7 @@ align-items: center;
 }
 
 .inputs button{
+ font-size: 11pt;
  color: black;
  background-color: white;
  border: 1px solid black

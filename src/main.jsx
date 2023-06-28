@@ -24,12 +24,13 @@ const router = createBrowserRouter([
         path: "/",
         element: <Posts />,
         loader: postsLoader,
-        children:[ { path: "/search-books", element: <BookSearch /> },
-      ]
+        children: [
+          { path: "/search-books", element: <BookSearch /> }
+        ],
       },
       {
         path: "/newpost",
-        element: <Editor/>,
+        element: <Editor />,
       },
       {
         path: "post/:id",
@@ -45,7 +46,9 @@ const router = createBrowserRouter([
       {
         path: "login",
         element: <Login />,
-      } ]},
+      },
+    ],
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

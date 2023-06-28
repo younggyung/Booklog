@@ -13,7 +13,7 @@ export default function Editor() {
   const [body, setBody] = useState();
   const [title, setTitle] = useState();
   const [date, setDate] = useState();
-  const [category, setCategory] = useState();
+  const [category, setCategory] = useState('카테고리없음');
 
   //user = firebase 유저 객체
   const user = useSelector((state) => state.auth.user);
