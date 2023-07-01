@@ -36,7 +36,7 @@ function PostList() {
         </h3>
       )}
       {!isLoading && posts.length === 0 && (
-        <div style={{ textAlign: "center" }}>
+        <div style={{ marginTop: "300px",textAlign: "center" }}>
           <h2>작성된 글이 없습니다</h2>
           <p>첫번째 글을 작성해보세요!</p>
         </div>
