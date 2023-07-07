@@ -9,11 +9,6 @@ function PostDetail() {
   //옵셔널 체이닝으로 user 값을 먼저 받아온 다음에 uid를 읽을 수 있게
   const user = useSelector((state) => state.auth.user)?.uid
 
-  console.log('로그인',user)
-  console.log('작성자',post.writer.uid)
-  console.log('작성자',post.writer)
-
-
 
   return (
     <>
