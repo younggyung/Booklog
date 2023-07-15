@@ -5,7 +5,7 @@ import classes from "./PostList.module.css";
 import Pagination from "./Pagination";
 
 function PostList() {
-  //defferdData (프로미스 객체 그대로 받아온다)
+  //deferData (프로미스 객체 그대로 받아온다)
   const { resData } = useLoaderData();
 
   const [isLoading, setIsLoading] = useState(true);

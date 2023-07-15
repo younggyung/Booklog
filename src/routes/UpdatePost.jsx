@@ -6,7 +6,7 @@ import ReactQuill from "react-quill";
 function UpdatePost() {
   const navigate = useNavigate();
 
-  //loader로 기존의 데이터를 받아와 date에 초깃값으로 세팅
+  //loader로 기존의 데이터를 받아와 data에 초깃값으로 세팅
   const originPost = useLoaderData();
   const [data,setData] = useState(originPost);
 
