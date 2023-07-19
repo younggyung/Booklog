@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import classes from "./Login.module.css";
 import SignUp from "./SignUp";
 import Modal from "../components/Modal";
-import { auth } from "../firebase";
+import { auth } from "../firebase/myFirebase";
 import {
   setPersistence,
   signInWithEmailAndPassword,

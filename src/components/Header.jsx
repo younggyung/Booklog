@@ -4,11 +4,11 @@ import { Link, useNavigate } from "react-router-dom";
 import BookSearch from "../routes/BookSearch";
 import Modal from "./Modal";
 import { useState, useEffect } from "react";
-import { auth, db } from "../firebase";
+import { auth, db } from "../firebase/myFirebase";
 import { doc, getDoc } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
-import store from '../store';
-import { loginSuccess,logoutSuccess } from "../authSlice";
+import store from '../store/store';
+import { loginSuccess,logoutSuccess } from "../store/authSlice";
 
 function Header() {
   const [nickname, setNickname] = useState();
