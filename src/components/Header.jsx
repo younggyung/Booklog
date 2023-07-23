@@ -33,7 +33,7 @@ function Header() {
       console.log("닉네임 가져오기 실패:", error);
     }
   }
-
+  console.log(nickname)
   const [isOpen, setIsOpen] = useState(false);
   const openModal = () => {
     setIsOpen(true);
@@ -88,10 +88,14 @@ function Header() {
         </li>
         <li>
           {nickname ? (
-            <a onClick={logoutHandler}>
-              <MdOutlineLogin />
-              {nickname}
-            </a>
+            //Todo : 아코디언 메뉴로 리팩토링 -> 로그아웃/마이페이지
+            <>
+              <a onClick={logoutHandler}>
+                <MdOutlineLogin />
+                {nickname}
+              </a>
+              <a href="/MyPage">마이페이지</a>
+              </>
           ) : (
             <Link type="button" to="/login">
               <MdOutlineLogin />

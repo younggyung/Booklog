@@ -13,6 +13,7 @@ import BookSearch from "./routes/BookSearch.jsx";
 import UpdatePost from "./routes/UpdatePost.jsx";
 import Login from "./routes/Login.jsx";
 import { loader as postsLoader } from "./components/PostList.jsx";
+import MyPage from "./components/Mypage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -47,6 +48,10 @@ const router = createBrowserRouter([
         path: "login",
         element: <Login />,
       },
+      {
+        path: "MyPage",
+        element: <MyPage />,
+      }
     ],
   },
 ]);

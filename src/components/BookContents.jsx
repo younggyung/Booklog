@@ -13,13 +13,15 @@ function BookContents({ title, description, author, image }) {
   return (
     <li className={classes.li}>
       <h4>{title}</h4>
-      <p>저자: {author.replaceAll('^',', ')}</p>
+      <p>저자: {author.replaceAll("^", ", ")}</p>
       <div className={classes.div}>
         <a href={image} target="_blank">
           <img src={image} />
         </a>
         {/*more이 true이면 접기, false면 더보기*/}
-        {description.length === 0 ? <p className={classes.none}>상세정보가 없습니다.</p>: more ? (
+        {description.length === 0 ? (
+          <p className={classes.none}>상세정보가 없습니다.</p>
+        ) : more ? (
           <p>
             {description + "  "}
             <a onClick={showMore} className={classes.more}>
@@ -33,8 +35,7 @@ function BookContents({ title, description, author, image }) {
               [더보기]
             </a>
           </p>
-        )} 
-       
+        )}
       </div>
     </li>
   );

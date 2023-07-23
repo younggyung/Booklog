@@ -1,4 +1,3 @@
-import { useState } from "react";
 import classes from "./Post.module.css";
 import { Link } from "react-router-dom";
 
